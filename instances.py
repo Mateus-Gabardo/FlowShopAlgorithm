@@ -13,7 +13,7 @@ def extract_array(line):
     return array
 
 def generate(instance):
-    global nbj, nbm, seed, obj, lowObj, array
+    global nbj, nbm, seed, obj, array
     array = []
     instances = getInstances()
     file = open(instances[instance], 'r')
@@ -25,4 +25,5 @@ def generate(instance):
             if 'initialSeed' in line: seed = extract_settings(line)
             if 'upperBound' in line: obj = extract_settings(line)
             if 'line' in line: array.append(extract_array(line))
+    return nbj, nbm, seed, obj, array
     file.close()
