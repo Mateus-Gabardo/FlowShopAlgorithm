@@ -25,5 +25,5 @@ def generate(instance):
             if 'initialSeed' in line: seed = extract_settings(line)
             if 'upperBound' in line: obj = extract_settings(line)
             if 'line' in line: array.append(extract_array(line))
-    return nbj, nbm, seed, obj, array
     file.close()
+    return nbj, nbm, seed, obj, array

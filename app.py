@@ -1,6 +1,7 @@
 import instances
+import sys
 
-instance = 1
+instance = int(sys.argv[1])
 
 #nbj = número de jobs
 #nbm = número de máquinas
