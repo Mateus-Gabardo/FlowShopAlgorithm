@@ -1,0 +1,10 @@
+./instances/tai20_5_1081.txt
+./instances/tai20_5_1278.txt
+./instances/tai20_5_1359.txt
+./instances/tai20_10_1378.txt
+./instances/tai20_10_1496.txt
+./instances/tai20_10_1582.txt
+./instances/tai20_20_2100.txt
+./instances/tai20_20_2178.txt
+./instances/tai20_20_2297.txt
+./instances/tai20_20_2326.txt
