@@ -1,0 +1,9 @@
+numberOfJobs=5
+numberOfMachines=4
+initialSeed=1866992158
+upperBound=1107
+lowerBound=1073
+line1=54,83,15,71,77
+line2=79,3,11,99,56
+line3=16,89,49,15,89
+line4=66,58,31,68,78

@@ -20,10 +20,10 @@ def generate(instance):
     for line in file.readlines():
         line = line.strip()
         if line != '' and line[0] != '#':
-            if 'numberOfJobs' in line: nbj = extract_settings(line)
-            if 'numberOfMachines' in line: nbm = extract_settings(line)
-            if 'initialSeed' in line: seed = extract_settings(line)
-            if 'upperBound' in line: obj = extract_settings(line)
+            if 'numberOfJobs' in line: nbj = int(extract_settings(line)[0])
+            if 'numberOfMachines' in line: nbm = int(extract_settings(line)[0])
+            if 'initialSeed' in line: seed = int(extract_settings(line)[0])
+            if 'upperBound' in line: obj = float(extract_settings(line)[0])
             if 'line' in line: array.append(extract_array(line))
     file.close()
     return nbj, nbm, seed, obj, array
