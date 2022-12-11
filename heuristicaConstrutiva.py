@@ -1,6 +1,7 @@
 import commonFunction
 import random
 import numpy
+import math
 
 #####################################################
 # Heuristica construtiva
@@ -26,8 +27,9 @@ def avaliacao(percentEstrategy, componentes):
     else:
         #Seleciona os x% melhores
         c_melhor = []
-        for i in range(int(componentes.count * percentEstrategy)):
-            c_melhor.append(i)
+        percent =  math.ceil(len(componentes) * (percentEstrategy/100))
+        for i in range(percent):
+            c_melhor.append(componentes[i])
         return random.choice(c_melhor)
 
 # Heuristica de construção simples Gulosa e Semi-gulosa

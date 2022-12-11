@@ -18,4 +18,4 @@ instance = int(sys.argv[1])
 #obj = objetivo a ser alcançado (melhor resultado)
 #array = matriz de tempos
 (nbj, nbm, seed, obj, array) = instances.generate(instance)
-heuristica_construtiva(array, nbj, nbm, obj)
+heuristica_construtiva(array, nbj, nbm, obj, 20)

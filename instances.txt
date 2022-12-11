@@ -8,3 +8,4 @@
 ./instances/tai20_20_2178.txt
 ./instances/tai20_20_2297.txt
 ./instances/tai20_20_2326.txt
+./instances/teste.txt
