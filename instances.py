@@ -24,7 +24,5 @@ def generate(instance):
             if 'numberOfMachines' in line: nbm = extract_settings(line)
             if 'initialSeed' in line: seed = extract_settings(line)
             if 'upperBound' in line: obj = extract_settings(line)
-            if 'lowerBound' in line: lowObj = extract_settings(line)
-            if 'array' in line: pass
             if 'line' in line: array.append(extract_array(line))
     file.close()
