@@ -6,9 +6,10 @@ def begin():
     instance = instances.getInstances()
     listModelo = getModelo()
     selModelo = 0
+    continuar = True
     for i in range(len(listModelo)):
         print(f'{i+1} - {listModelo[i]}')
-    while True:
+    while continuar:
         try:
             selModelo = int(input('Selecione o modelo: ')) - 1
             if selModelo >= 0 or selModelo < int(len(listModelo) - 1):
@@ -19,25 +20,22 @@ def begin():
         text = instance[i].split('/')[2]
         text = text.split('.')[0]
         print(f'{i+1} - {text}')
-    while True:
-        try:
-            selInstance = int(input('Selecione um número acima para selecionar a instância: ')) - 1
-            selStrategy = int(input('Selecione um percentual de estratégia (0 para gulosa): '))
-            if selInstance > 0 or selInstance <= int(len(instance)):
-                #nbj = número de jobs
-                #nbm = número de máquinas
-                #seed = seed utilizado da instância
-                #obj = objetivo a ser alcançado (melhor resultado)
-                #array = matriz de tempos
-                (nbj, nbm, seed, obj, array) = instances.generate(selInstance)
-                if isinstance(selStrategy, int) and (selStrategy > 0 or selStrategy <= 100):
-                    if selStrategy == 0:
-                        heuristica_construtiva(array, nbj, nbm, obj, selModelo)
-                    else:
-                        heuristica_construtiva(array, nbj, nbm, obj, selModelo, selStrategy)
-                break
-        except:
-            print('Valores informados inválidos. Informar novamente!')
+    while continuar:
+        selInstance = int(input('Selecione um número acima para selecionar a instância: ')) - 1
+        selStrategy = int(input('Selecione um percentual de estratégia (0 para gulosa): '))
+        if selInstance > 0 or selInstance <= int(len(instance)):
+            #nbj = número de jobs
+            #nbm = número de máquinas
+            #seed = seed utilizado da instância
+            #obj = objetivo a ser alcançado (melhor resultado)
+            #array = matriz de tempos
+            (nbj, nbm, seed, obj, array) = instances.generate(selInstance)
+            if isinstance(selStrategy, int) and (selStrategy > 0 or selStrategy <= 100):
+                if selStrategy == 0:
+                    heuristica_construtiva(array, nbj, nbm, obj, selModelo)
+                else:
+                    heuristica_construtiva(array, nbj, nbm, obj, selModelo, selStrategy)
+            break
 
 def getModelo():
     list = ['Heurística do menor para o maior', 'Heurística NEH']
