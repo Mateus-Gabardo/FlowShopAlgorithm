@@ -1,6 +1,11 @@
+import os
+
 def getInstances():
-    file = open ("./instances.txt", 'r')
-    list = file.read().splitlines()
+    locate = './instances/'
+    files = os.listdir(locate)
+    list = []
+    for i in range(len(files)):
+        list.append(locate + files[i])
     return list
 
 def extract_settings(line):
