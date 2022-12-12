@@ -1,5 +1,6 @@
 import instances
 import heuristicaConstrutiva as heuConst
+import heuristicaConstrutivaNEH as neh
 
 def begin():
     instance = instances.getInstances()
@@ -30,7 +31,8 @@ def begin():
             print('Valores informados inválidos. Informar novamente!')
 
 def heuristica_construtiva(data, nb_jobs, nb_machines, objetivo, estrategia = 0):
-    bestSeq, makespan = heuConst.construcaoSimples(data, nb_jobs, nb_machines, estrategia)
+    #bestSeq, makespan = heuConst.construcaoSimples(data, nb_jobs, nb_machines, estrategia)
+    bestSeq, makespan = neh.heuristicaNEH(data, nb_jobs, nb_machines, estrategia)
     print('Melhor sequência:')
     print(bestSeq)
     print('Objetivo:', objetivo, ', makespan:', makespan)
