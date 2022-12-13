@@ -44,7 +44,10 @@ def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1
 
     return best_seq, min_cmax
 
-def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 0):
+# estrategia - define o tipo de retorno: 
+#   1- retorna a melhor melhoria entre todos os vizinhos
+#   2 -retorna o primeiro vizinho melhor
+def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 1):
     # Retorna uma solução inicial de maneira aletório que será permutada durante a busca local
     ramdom_seq = solucaoInicial(nb_jobs)
     best_seq = ramdom_seq
@@ -53,7 +56,7 @@ def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 0):
     qtd_iteracoes = calculaFatorial(nb_jobs)
     
     while int(qtd_iteracoes) > 0 :
-        seq_current, min_cmax = escolheMelhorVizinho(best_seq, data, nb_jobs, nb_machines)        
+        seq_current, min_cmax = escolheMelhorVizinho(best_seq, data, nb_jobs, nb_machines, estrategia)        
         if(min_cmax < best_cmax):
             best_cmax = min_cmax
             best_seq = seq_current
