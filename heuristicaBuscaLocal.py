@@ -16,6 +16,7 @@ def calculaFatorial(nb_jobs):
         result *= i
     return result
 
+# Insere um elemento em uma dada posição do array gerando a perutação dos elementos
 def insertion(sequence, index_position, value):
     new_seq = sequence[:]
     new_seq.insert(index_position, value)
@@ -53,7 +54,7 @@ def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 1):
     best_seq = ramdom_seq
     best_cmax = util.makespan(best_seq, data, nb_machines)[nb_machines - 1][len(best_seq)]
 
-    qtd_iteracoes = calculaFatorial(nb_jobs)
+    qtd_iteracoes = 100
     
     while int(qtd_iteracoes) > 0 :
         seq_current, min_cmax = escolheMelhorVizinho(best_seq, data, nb_jobs, nb_machines, estrategia)        
