@@ -4,7 +4,7 @@ import math
 import random
 
 #####################################################
-# algorithm for NEH
+# Heuristica constutiva NEH
 # Heuristica construtiva simples baseado em Nawaz, Enscore e Ham
 #####################################################
 
@@ -56,7 +56,5 @@ def heuristicaNEH(data, nb_jobs, nb_machines, estrategia = 0):
         else:
             seq_current = best_seq
         print()
-        #Colocar um if para a busca aleatoria
-        #print(aux)
         
     return seq_current, util.makespan(seq_current, data, nb_machines)[nb_machines - 1][nb_jobs]
