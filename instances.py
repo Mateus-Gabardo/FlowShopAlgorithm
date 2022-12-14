@@ -32,3 +32,5 @@ def generate(instance):
             if 'line' in line: array.append(extract_array(line))
     file.close()
     return nbj, nbm, seed, obj, array
+
+print(getInstances())

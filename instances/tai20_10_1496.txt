@@ -1,4 +1,4 @@
-numberOfJobs=2094
+numberOfJobs=20
 numberOfMachines=10
 initialSeed=873136276
 upperBound=1496

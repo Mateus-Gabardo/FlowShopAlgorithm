@@ -10,9 +10,7 @@ def buscaParcial(seq_current, data, nb_machines):
     best_seq = list(seq_current)
     ##k = 2 (solução por Dubois-Lacoste, Pagnozzi e Stützle (2017))
     for i in range(2):
-        teste = random.randint(0, len(best_seq) - len(jobsRemoved) - 1)
-        print(str(len(best_seq) - len(jobsRemoved)) + '  ' + str(teste))
-        jobsRemoved.append(best_seq.pop(teste))
+        jobsRemoved.append(best_seq.pop(random.randint(0, len(best_seq) - len(jobsRemoved) - 1)))
     best_seq, min_cmax = buscaSimples.escolheMelhorVizinho(best_seq, data, len(best_seq), nb_machines)
     for i in range(2):
         aux_seq = list(best_seq)
@@ -45,7 +43,6 @@ def funcaoTp(cmax_curent, cmax_new, data):
     total /= (row * col * 10)
     total *= 0.7
     tp = math.pow(math.e, (cmax_curent - cmax_new)/total)
-    print(tp)
     return tp
 
 def buscaLocalSolucaoParcial(data, nb_jobs, nb_machines):
