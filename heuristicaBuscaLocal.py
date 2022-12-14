@@ -29,11 +29,12 @@ def insertion(sequence, index_position, value):
 #   2 -retorna o primeiro vizinho melhor
 def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1):
     jobSorted = random.randrange(0, nb_jobs)
+    aux_seq = list(seq_current)
     best_seq = []
-    walk = seq_current.pop(jobSorted)
+    walk = aux_seq.pop(jobSorted)
     min_cmax = float("inf")
     for j in range(0, nb_jobs):
-        tmp_seq = insertion(seq_current, j, walk)
+        tmp_seq = insertion(aux_seq, j, walk)
         cmax_tmp = util.makespan(tmp_seq, data, nb_machines)[nb_machines - 1][len(tmp_seq)]
         print(tmp_seq, cmax_tmp)
 
@@ -41,7 +42,7 @@ def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1
             best_seq = tmp_seq
             min_cmax = cmax_tmp
             if j > 0 and estrategia == 2:
-                return best_seq
+                return best_seq, min_cmax
 
     return best_seq, min_cmax
 
