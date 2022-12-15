@@ -46,6 +46,7 @@ def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1
 
     return best_seq, min_cmax
 
+# Algoritmo de busca local simples.
 # estrategia - define o tipo de retorno: 
 #   1- retorna a melhor melhoria entre todos os vizinhos
 #   2 -retorna o primeiro vizinho melhor
