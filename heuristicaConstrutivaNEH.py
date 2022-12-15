@@ -47,7 +47,7 @@ def heuristicaNEH(data, nb_jobs, nb_machines, estrategia = 0):
             cmax_tmp = util.makespan(tmp_seq, data, nb_machines)[nb_machines - 1][len(tmp_seq)]
 
             aux[cmax_tmp] = tmp_seq
-            print(tmp_seq, cmax_tmp)
+            #print(tmp_seq, cmax_tmp)
             if min_cmax > cmax_tmp:
                 best_seq = tmp_seq
                 min_cmax = cmax_tmp
@@ -55,6 +55,6 @@ def heuristicaNEH(data, nb_jobs, nb_machines, estrategia = 0):
            seq_current = avaliacao(estrategia, ordenaMap(aux))
         else:
             seq_current = best_seq
-        print()
+        #print()
         
     return seq_current, util.makespan(seq_current, data, nb_machines)[nb_machines - 1][nb_jobs]

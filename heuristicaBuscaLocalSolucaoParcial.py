@@ -24,7 +24,7 @@ def buscaParcial(seq_current, data, nb_machines):
             elif min_cmax > cmax_tmp:
                 best_seq = tmp_seq
                 min_cmax = cmax_tmp
-            print(tmp_seq, cmax_tmp)
+            #print(tmp_seq, cmax_tmp)
             
     return best_seq
 
@@ -45,8 +45,18 @@ def funcaoTp(cmax_curent, cmax_new, data):
     tp = math.pow(math.e, (cmax_curent - cmax_new)/total)
     return tp
 
-def buscaLocalSolucaoParcial(data, nb_jobs, nb_machines):
-    seq_inicial, cmax_best = buscaSimples.buscaLocalSimples(data, nb_jobs, nb_machines, 2)
+def buscaSolucaoInicial(data, nb_jobs, nb_machines, solucaoInicial = None):
+    seq_inicial = None 
+    cmax_best = None
+    if solucaoInicial is None:
+        seq_inicial, cmax_best = buscaSimples.buscaLocalSimples(data, nb_jobs, nb_machines, 2)        
+    else:
+        seq_inicial = solucaoInicial
+        cmax_best = util.makespan(seq_inicial, data, nb_machines)[nb_machines - 1][len(seq_inicial)]
+    return seq_inicial, cmax_best
+
+def buscaLocalSolucaoParcial(data, nb_jobs, nb_machines, solucaoInicial = None):
+    seq_inicial, cmax_best = buscaSolucaoInicial(data, nb_jobs, nb_machines, solucaoInicial)     
     seq_best = seq_inicial
     #estagnação (50 iterações ou 20 buscas sem melhoras)
     qtd_iteracoes = 50
@@ -59,7 +69,6 @@ def buscaLocalSolucaoParcial(data, nb_jobs, nb_machines):
             cmax_best = cmax_curent
             seq_best = seq_current
             qtd_iteracoesSemMelhora = 10
-        ##VERIFICAR ISTO!
         elif random.uniform(0.0, 1.0) < funcaoTp(cmax_best, cmax_curent, data):
             aceitacao(seq_best, cmax_best, seq_current, cmax_curent)
             qtd_iteracoesSemMelhora -= 1
@@ -67,5 +76,5 @@ def buscaLocalSolucaoParcial(data, nb_jobs, nb_machines):
     return seq_best, cmax_best
 
 
-(nbj, nbm, seed, obj, array) = instances.generate(10)
-print(buscaLocalSolucaoParcial(array, nbj, nbm))
+#(nbj, nbm, seed, obj, array) = instances.generate(10)
+#print(buscaLocalSolucaoParcial(array, nbj, nbm))

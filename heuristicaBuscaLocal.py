@@ -36,7 +36,7 @@ def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1
     for j in range(0, nb_jobs):
         tmp_seq = insertion(aux_seq, j, walk)
         cmax_tmp = util.makespan(tmp_seq, data, nb_machines)[nb_machines - 1][len(tmp_seq)]
-        print(tmp_seq, cmax_tmp)
+        #print(tmp_seq, cmax_tmp)
 
         if min_cmax > cmax_tmp:
             best_seq = tmp_seq
@@ -46,17 +46,26 @@ def escolheMelhorVizinho(seq_current, data, nb_jobs, nb_machines, estrategia = 1
 
     return best_seq, min_cmax
 
+def defineSolucaoInicial(data, nb_jobs, nb_machines, solucaoInicialDefinido = None):
+    ramdom_seq = None
+    if solucaoInicialDefinido is None:
+        ramdom_seq = solucaoInicial(nb_jobs)
+    else:
+        ramdom_seq = solucaoInicialDefinido
+
+    best_cmax = util.makespan(ramdom_seq, data, nb_machines)[nb_machines - 1][len(ramdom_seq)]
+    return ramdom_seq, best_cmax
+
+
 # Algoritmo de busca local simples.
 # estrategia - define o tipo de retorno: 
 #   1- retorna a melhor melhoria entre todos os vizinhos
 #   2 -retorna o primeiro vizinho melhor
-def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 1):
-    # Retorna uma solução inicial de maneira aletório que será permutada durante a busca local
-    ramdom_seq = solucaoInicial(nb_jobs)
-    best_seq = ramdom_seq
-    best_cmax = util.makespan(best_seq, data, nb_machines)[nb_machines - 1][len(best_seq)]
+def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 1, solucaoInicialDefinido = None):
+    # Retorna uma solução inicial de maneira aletório que será permutada durante a busca local    
+    best_seq, best_cmax = defineSolucaoInicial(data, nb_jobs, nb_machines, solucaoInicialDefinido)
 
-    qtd_iteracoes = 100
+    qtd_iteracoes = 50
     
     while int(qtd_iteracoes) > 0 :
         seq_current, min_cmax = escolheMelhorVizinho(best_seq, data, nb_jobs, nb_machines, estrategia)        
@@ -67,5 +76,5 @@ def buscaLocalSimples(data, nb_jobs, nb_machines, estrategia = 1):
 
     return best_seq, best_cmax
 
-#(nbj, nbm, seed, obj, array) = instances.generate(10)
+#nbj, nbm, seed, obj, array) = instances.generate(10)
 #print(buscaLocalSimples(array, nbj, nbm, obj))
