@@ -6,24 +6,22 @@ import heuristicaBuscaLocalSolucaoParcial as busca2
 import grasp
 from datetime import datetime
 
-def fxheu1():
+def fxheu1(alpha):
     file = open('teste.txt', 'w')
-    delta = 95
     for i in range(10):
         (nbj, nbm, seed, obj, array) = instances.generate(i)
-        best_seq, best_cmax = heu1.construcaoSimples(array, nbj, nbm, delta)
-        text = str(f'heu1: instance: {i}, delta: {delta}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
+        best_seq, best_cmax = heu1.construcaoSimples(array, nbj, nbm, alpha)
+        text = str(f'heu1: instance: {i}, alpha: {alpha}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
         #file.write(f'{text}\n')
         print(f'{text}')
     file.close()
 
-def fxheu2():
+def fxheu2(alpha):
     file = open('teste.txt', 'w')
-    delta = 10
     for i in range(10):
         (nbj, nbm, seed, obj, array) = instances.generate(i)
-        best_seq, best_cmax = heu2.heuristicaNEH(array, nbj, nbm, delta)
-        text = str(f'heu2: instance: {i}, delta: {delta}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
+        best_seq, best_cmax = heu2.heuristicaNEH(array, nbj, nbm, alpha)
+        text = str(f'heu2: instance: {i}, alpha: {alpha}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
         #file.write(f'{text}\n')
         print(f'{text}')
     file.close()
@@ -49,12 +47,12 @@ def fxbusca2():
     file.close()
     return best_seq
 
-def fxgrasp(estrategia):
+def fxgrasp(alpha, estrategia):
     file = open('teste.txt', 'w')
     for i in range(10):
         (nbj, nbm, seed, obj, array) = instances.generate(i)
-        best_seq, best_cmax = grasp.defineEstrategiaGrasp(array, nbj, nbm, estrategia)
-        text = str(f'grasp{estrategia} -- instance: {i}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
+        best_seq, best_cmax = grasp.defineEstrategiaGrasp(array, nbj, nbm, alpha, estrategia)
+        text = str(f'grasp{estrategia}: instance: {i}, alpha: {alpha}, upperBound: {int(instances.generate(i)[3])}, value: {int(best_cmax)}')
         #file.write(f'{text}\n')
         print(f'{text}')
     file.close()
@@ -94,7 +92,6 @@ def mediaGrasp(array, nbj, nbm, alpha, estrategia, size):
         total += best_cmax
     return int(total / size)
 
-
 def med(instance, size):
     start_time = datetime.now()
     file = open('teste.txt', 'w')
@@ -126,6 +123,10 @@ def med(instance, size):
         print(f'{text}')
     for j in range(4):
         for i in range(instance):
+            if j <= 1:
+                alpha = 95
+            else:
+                alpha = 10
             (nbj, nbm, seed, obj, array) = instances.generate(i)
             time = 'Duration: {}'.format(datetime.now() - start_time)
             text = str(f'grasp{j+1}: instance: {i}, alpha: {alpha}, upperBound: {int(instances.generate(i)[3])}, avg: {mediaGrasp(array, nbj, nbm, alpha, j + 1, size)}, time: {time}')
@@ -133,4 +134,27 @@ def med(instance, size):
             print(f'{text}')
     file.close()
 
-med(10, 5)
+#Executa todas as instâncias e salva os resultados no arquivo teste.txt.
+#Como parâmetros, informar a quantidade de instâncias a serem processadas,
+#e quantas vezes o código será repetido para obter a média de resultados.
+#med(10, 5)
+
+#Executa a heurística 1. O parâmetro é: alfa guloso
+fxheu1(50)
+
+#Executa a heurística 2. O parâmetro é: alfa guloso
+fxheu2(50)
+
+#Executa a busca local 1.
+fxbusca1()
+
+#Executa a busca local 2.
+fxbusca2()
+
+#Executa o grasp. Os parâmetros são: alfa guloso, modelo do grasp.
+#Os modelos do grasp são: 
+#1: heurística 1 com busca local 1
+#2: heurística 1 com busca local 2
+#3: heurística 2 com busca local 1
+#4: heurística 2 com busca local 2
+fxgrasp(10, 1)

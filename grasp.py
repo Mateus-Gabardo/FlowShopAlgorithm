@@ -39,9 +39,9 @@ def graspBase(data, nb_jobs, nb_machines, alfa, construcao_semi_gulosa, busca_lo
 
             qtd_iteracoesSemMelhora = 10
         else:
-           qtd_iteracoesSemMelhora-= -1
+           qtd_iteracoesSemMelhora -= 1
 
-        qtd_iteracoes-= 1
+        qtd_iteracoes -= 1
 
     return best_seq, cmax_best
     
@@ -68,4 +68,3 @@ def defineEstrategiaGrasp(data, nb_jobs, nb_machines, alpha, estrategia):
 
 #(nbj, nbm, seed, obj, array) = instances.generate(2)
 #print(defineEstrategiaGrasp(array, nbj, nbm, 20, 4))
-        
