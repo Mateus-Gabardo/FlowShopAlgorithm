@@ -28,7 +28,7 @@ def graspBase(data, nb_jobs, nb_machines, alfa, construcao_semi_gulosa, busca_lo
     best_seq = seq_current
     cmax_best = cmax_current
 
-    qtd_iteracoes = 10
+    qtd_iteracoes = 25
     qtd_iteracoesSemMelhora = 10
     while qtd_iteracoes > 0 and qtd_iteracoesSemMelhora > 0:
         seq_current, cmax_current = defineConstrucaoSemiGulosa(data, nb_jobs, nb_machines, alfa, construcao_semi_gulosa)
@@ -49,23 +49,23 @@ def graspBase(data, nb_jobs, nb_machines, alfa, construcao_semi_gulosa, busca_lo
 # 2 - Combinando algoritmo Heuristica Construtiva Simples com a de Busca local em solucao parcial
 # 3 - Combinando algoritmo de NEH com Busca Local Simples
 # 4 - Combinando algoritmo de NEH com a de Busca local em solucao parcial 
-def defineEstrategiaGrasp(data, nb_jobs, nb_machines, estrategia):
+def defineEstrategiaGrasp(data, nb_jobs, nb_machines, alpha, estrategia):
     best_seq = None
     cmax_best = None
     if estrategia == 1:
-        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, 20, heuristicaConstrutiva, heuristicaBuscaLocal)
+        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, alpha, heuristicaConstrutiva, heuristicaBuscaLocal)
 
     elif estrategia == 2:
-        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, 20, heuristicaConstrutiva, BLS)
+        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, alpha, heuristicaConstrutiva, BLS)
     
     elif estrategia == 3:
-        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, 20, NEH, heuristicaBuscaLocal)
+        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, alpha, NEH, heuristicaBuscaLocal)
 
     else:
-        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, 20, NEH, BLS)
+        best_seq, cmax_best = graspBase(data, nb_jobs, nb_machines, alpha, NEH, BLS)
         
     return best_seq, cmax_best
 
-(nbj, nbm, seed, obj, array) = instances.generate(2)
-print(defineEstrategiaGrasp(array, nbj, nbm, 4))
+#(nbj, nbm, seed, obj, array) = instances.generate(2)
+#print(defineEstrategiaGrasp(array, nbj, nbm, 20, 4))
         
